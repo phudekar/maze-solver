@@ -36,3 +36,43 @@
     transform: rotate(360deg);
   }
 }
+
+.maze {
+  margin: 20px;
+  text-align: left;
+}
+
+.maze .row {
+  display: flex;
+}
+
+.section {
+  width: 10px;
+  height: 10px;
+}
+
+.section :first-child {
+  left: 0px;
+  top: 0px;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  border-color: black;
+  border-width: 2px;
+}
+
+.section .top {
+  border-top-style: solid;
+}
+
+.section .left {
+  border-left-style: solid;
+}
+
+.section .bottom {
+  border-bottom-style: solid;
+}
+
+.section .right {
+  border-right-style: solid;
+}
