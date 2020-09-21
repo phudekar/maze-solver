@@ -16,16 +16,16 @@ export const newMaze = (size) => {
 }
 
 const getSection = (i, j, size, maze) => {
-    if (i === 0 && j == 0)
+    if (i === 0 && j === 0)
         return SectionTypes.TOP_LEFT;
 
-    if (i === 0 && j == size - 1)
+    if (i === 0 && j === size - 1)
         return SectionTypes.TOP_RIGHT;
 
-    if (i === size - 1 && j == 0)
+    if (i === size - 1 && j === 0)
         return SectionTypes.BOTTOM_LEFT;
 
-    if (i === size - 1 && j == size - 1)
+    if (i === size - 1 && j === size - 1)
         return SectionTypes.BOTTOM_RIGHT;
 
     if (i === 0)
@@ -41,7 +41,7 @@ const getSection = (i, j, size, maze) => {
         return SectionTypes.RIGHT_WALL;
 
     const r = Math.random();
-    if (j == 0 && j < size - 1 &&
+    if (j === 0 && j < size - 1 &&
         (maze[i][j - 1] === SectionTypes.LEFT_WALL || maze[i][j - 1] === SectionTypes.RIGHT_WALL))
         return SectionTypes.SPACE;
 
