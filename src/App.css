@@ -54,7 +54,7 @@
 
 .block :first-child {
   border-color: black;
-  border-width: 2px;
+  border-width: 1px;
 }
 
 .block .top {

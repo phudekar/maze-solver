@@ -50,6 +50,10 @@ export class Section {
         this._visited = true;
     }
 
+    isClosed(){
+       return !Object.keys(this._walls).find(k => !this._walls[k]);
+    }
+
     breakWall(wall) {
         this._walls[wall] = false;
     }

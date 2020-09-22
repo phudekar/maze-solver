@@ -1,48 +1,34 @@
-import { Section } from "./sections"
+import { Section, Walls } from "./sections"
 
 
 export const newMaze = (size) => {
     const maze = new Array(size).fill(0)
         .map((_, i) => new Array(size).fill(0).map((_, j) => new Section(i, j)));
-    let current = null;
-    while (true) {
-        current = getUnvisited(maze);
-
+    let candidates = [maze[getRandomNumber(maze.length)][getRandomNumber(maze.length)]];
+    do {
+        let current = candidates.pop();
         if (!current)
             break;
 
-        if (current.visited)
-            continue;
-
         current.markVisited();
-        console.log(current);
-        let neighbors = getNeighbors(current.row, current.column, maze)
-
-        while (neighbors.find(n => !n.visited)) {
-            const unvisited = neighbors.filter(n => !n.visited);
-            const next = pickOneRandom(unvisited);
+        let neighbors = getNeighbors(current.row, current.column, maze);
+        const unvisited = neighbors.filter(n => !n.visited);
+        let next = pickOneRandom(unvisited);
+        if (next) {
+            candidates.push(current);
+            candidates.push(next);
             current.breakWallWith(next);
-            next.markVisited();
-            current = next;
-            neighbors = getNeighbors(current.row, current.column, maze)
         }
-
-    }
+    } while (true)
 
     return maze;
 }
 
-const getUnvisited = (maze) => {
-    for (let row = 0; row < maze.length; row++) {
-        for (let column = 0; column < maze.length; column++) {
-            if (!maze[row][column].visited)
-                return maze[row][column];
-        }
-    }
-    return null;
-}
+export const getRandomNumber = (max) => Math.floor(Math.random() * max);
 
 export const pickOneRandom = (arr) => {
+    if (arr.length == 0)
+        return null;
     const index = Math.floor(Math.random() * arr.length);
     return arr[index];
 }
