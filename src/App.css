@@ -46,33 +46,29 @@
   display: flex;
 }
 
-.section {
-  width: 10px;
-  height: 10px;
+.block {
+  width: 20px;
+  height: 20px;
+  display: grid;
 }
 
-.section :first-child {
-  left: 0px;
-  top: 0px;
-  width: 10px;
-  height: 10px;
-  position: relative;
+.block :first-child {
   border-color: black;
   border-width: 2px;
 }
 
-.section .top {
+.block .top {
   border-top-style: solid;
 }
 
-.section .left {
+.block .left {
   border-left-style: solid;
 }
 
-.section .bottom {
+.block .bottom {
   border-bottom-style: solid;
 }
 
-.section .right {
+.block .right {
   border-right-style: solid;
 }
