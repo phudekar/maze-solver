@@ -52,6 +52,19 @@
   display: grid;
 }
 
+.block.highlight {
+  background-color: pink;
+}
+
+.block .path {
+  position: relative;
+  top: 8px;
+  left: 8px;
+  width: 4px;
+  height: 4px;
+  background-color: red;
+}
+
 .block :first-child {
   border-color: black;
   border-width: 1px;
