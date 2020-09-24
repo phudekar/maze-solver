@@ -1,5 +1,5 @@
 const { newMaze, isTopWallClosed, isBottomWallClosed } = require("./mazeGenerator");
-const { Section, Walls } = require("./sections");
+const { Block, Walls } = require("./block");
 
 describe('Maze Generator', () => {
     it('should generate random maze with given size', () => {
@@ -12,7 +12,7 @@ describe('Maze Generator', () => {
 
     it('should return true if top wall is closed', () => {
         const maze = [
-            [0, new Section(), 0],
+            [0, new Block(), 0],
             [0, 0, 0],
             [0, 0, 0],
 
@@ -22,7 +22,7 @@ describe('Maze Generator', () => {
 
     it('should return false if top wall is not closed', () => {
         const maze = [
-            [0, new Section({ [Walls.BOTTOM]: false }), 0],
+            [0, new Block({ [Walls.BOTTOM]: false }), 0],
             [0, 0, 0],
             [0, 0, 0],
 
@@ -34,7 +34,7 @@ describe('Maze Generator', () => {
         const maze = [
             [0, 0, 0],
             [0, 0, 0],
-            [0, new Section(), 0]
+            [0, new Block(), 0]
         ]
         expect(isBottomWallClosed(1, 1, maze)).toBe(true);
     })

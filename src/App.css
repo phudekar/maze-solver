@@ -53,16 +53,19 @@
 }
 
 .block.highlight {
-  background-color: pink;
+  background-color: rgb(194, 231, 254);
 }
 
-.block .path {
-  position: relative;
-  top: 8px;
-  left: 8px;
-  width: 4px;
-  height: 4px;
+.block.path {
+  background-color: rgb(249, 131, 131);
+}
+
+.block.start {
   background-color: red;
+}
+
+.block.end {
+  background-color:red;
 }
 
 .block :first-child {

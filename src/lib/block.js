@@ -1,15 +1,3 @@
-export const SectionTypes = {
-    RIGHT_WALL: 'right',
-    LEFT_WALL: 'left',
-    TOP_WALL: 'top',
-    BOTTOM_WALL: 'bottom',
-    SPACE: 'space',
-    TOP_LEFT: 'top left',
-    TOP_RIGHT: 'top right',
-    BOTTOM_LEFT: 'bottom left',
-    BOTTOM_RIGHT: 'bottom right',
-}
-
 export const Walls = {
     LEFT: 'left',
     RIGHT: 'right',
@@ -19,11 +7,10 @@ export const Walls = {
 
 const defaultWalls = { left: true, right: true, bottom: true, top: true };
 
-export class Section {
+export class Block {
     _walls = {};
     _row = 0;
     _column = 0;
-    _visited = false;
     constructor(row, column, walls) {
         this._row = row;
         this._column = column;
@@ -40,14 +27,6 @@ export class Section {
 
     get walls() {
         return { ...this._walls };
-    }
-
-    get visited() {
-        return this._visited;
-    }
-
-    markVisited() {
-        this._visited = true;
     }
 
     isClosed(){

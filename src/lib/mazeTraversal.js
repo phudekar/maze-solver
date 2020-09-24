@@ -1,5 +1,4 @@
-import { Walls } from "./sections";
-
+import { Walls } from "./block";
 
 export const clearMaze = (maze) => {
     for (let row = 0; row < maze.length; row++) {
@@ -11,31 +10,50 @@ export const clearMaze = (maze) => {
     return maze;
 }
 
-export const highLightPath = (maze, from, to) => {
-    const nodes = [maze[from.row][from.column]];
+export const highlightPath = (maze, from, to) => {
+    const nodes = maze.map(row => row.map(block => ({ block, coveredDistance: 0 })));
+    let candidates = [nodes[from.row][from.column]];
+    const visited = [];
+    const path = [];
     while (true) {
-        const current = nodes.pop();
-
+        const current = candidates.pop();
         if (!current)
             break;
-        current.highlight = true;
 
-        if (current.row === to.row && current.column === to.column)
+        const currentBlock = current.block;
+        current.visited = true;
+        visited.push(currentBlock);
+
+        if (currentBlock.row === to.row && currentBlock.column === to.column) {
+            let node = current;
+            do {
+                path.push(node.block);
+                node = node.previous;
+            } while (node)
             break;
-
-        const connectedNeighbors = Object.keys(current.walls)
-            .filter(k => current.walls[k] === false)
-            .map(w => getNeighborFromWall(w, maze, current.row, current.column))
-            .filter(n => !n.highlight);
-
-        connectedNeighbors.forEach(n => nodes.push(n));
-
-        if (connectedNeighbors.length === 0) {
-            current.highlight = false;
         }
+
+        const connectedNeighbors = Object.keys(currentBlock.walls)
+            .filter(k => currentBlock.walls[k] === false)
+            .map(w => getNeighborFromWall(w, nodes, currentBlock.row, currentBlock.column))
+            .filter(n => !n.visited)
+            .map(n => {
+                n.coveredDistance = current.coveredDistance + 1;
+                n.estimatedDistance = getEstimatedDistanceTo(n.block, to);
+                n.previous = current;
+                return n
+            })
+
+
+        candidates = candidates.concat(connectedNeighbors)
+            .sort((a, b) => (a.coveredDistance + a.estimatedDistance) > (b.coveredDistance + b.estimatedDistance)
+                ? -1 : ((a.coveredDistance + a.estimatedDistance) < (b.coveredDistance + b.estimatedDistance)
+                    ? 1 : 0));
     }
-    return maze;
+    return { visited, path };
 }
+
+export const getEstimatedDistanceTo = (a, b) => Math.sqrt(Math.pow(b.row - a.row, 2) + Math.pow(b.column - a.column, 2));
 
 export const getNeighborFromWall = (wall, maze, row, column) => {
     switch (wall) {
