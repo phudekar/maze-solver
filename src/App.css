@@ -57,11 +57,11 @@
 }
 
 .block.path {
-  background-color: rgb(249, 131, 131);
+  background-color: pink;
 }
 
 .block.start {
-  background-color: red;
+  background-color: green;
 }
 
 .block.end {

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import Maze from './components/Maze';
-import { Block } from './lib/block';
+import CanvasMaze from './components/CanvasMaze';
 import { newMaze } from './lib/mazeGenerator';
 
 function App() {
@@ -55,7 +55,9 @@ function App() {
             setMaze(newMaze(parseInt(sizeInput.current.value)))
         }}>Generate</button>
       </div>
-      { maze && <Maze maze={maze} />}
+      {/* { maze && <Maze maze={maze} />} */}
+      { maze && <CanvasMaze maze={maze} />}
+
     </div>
   );
 }
