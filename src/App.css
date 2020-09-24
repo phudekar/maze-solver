@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -38,7 +38,7 @@
 }
 
 .maze {
-  margin: 20px;
+  margin-left: 20px;
   text-align: left;
 }
 

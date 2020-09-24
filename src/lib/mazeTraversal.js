@@ -10,7 +10,8 @@ export const clearMaze = (maze) => {
     return maze;
 }
 
-export const highlightPath = (maze, from, to) => {
+export const findPath = (maze, from, to) => {
+    console.time("findPath");
     const nodes = maze.map(row => row.map(block => ({ block, coveredDistance: 0 })));
     let candidates = [nodes[from.row][from.column]];
     const visited = [];
@@ -50,6 +51,7 @@ export const highlightPath = (maze, from, to) => {
                 ? -1 : ((a.coveredDistance + a.estimatedDistance) < (b.coveredDistance + b.estimatedDistance)
                     ? 1 : 0));
     }
+    console.timeEnd("findPath");
     return { visited, path };
 }
 
