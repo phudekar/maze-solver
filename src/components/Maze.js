@@ -20,11 +20,6 @@ const Maze = ({ maze, showVisited }) => {
         clear();
     }, [maze])
 
-    useEffect(() => {
-
-
-    }, [start, end, path])
-
     // console.time("Render");
     const mazeDom = (
         <div className="maze">

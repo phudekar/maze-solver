@@ -18,6 +18,9 @@ const Maze = ({ maze, showVisited }) => {
         setEnd(null);
         setVisited([]);
         setPath([]);
+        const canvas = canvasRef.current
+        const ctx = canvas.getContext('2d')
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
     const size = 20;
@@ -88,7 +91,7 @@ const Maze = ({ maze, showVisited }) => {
         // drawMaze();
         console.timeEnd("rendering")
 
-    }, [start, end, path])
+    }, [start, end, path, showVisited])
 
     const setStartPosition = (event) => {
         const canvas = canvasRef.current;

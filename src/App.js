@@ -19,7 +19,7 @@ function App() {
       <div className="input-group">
         Maze Size: <input ref={sizeInput} />
         <button onClick={() => {
-          if (parseInt(sizeInput.current.value))
+          if (parseInt(sizeInput.current.value) && parseInt(sizeInput.current.value) <= 1000)
             setMaze(newMaze(parseInt(sizeInput.current.value)))
         }}>Generate</button>
       </div>
