@@ -9,6 +9,8 @@ const Maze = ({ maze, showVisited }) => {
     const [start, setStart] = useState(null);
     const [end, setEnd] = useState(null);
 
+    const [canvasImage, setCanvasImage] = useState(null);
+
     const canvasRef = useRef(null)
 
     const clear = () => {
@@ -51,6 +53,9 @@ const Maze = ({ maze, showVisited }) => {
                 ctx.stroke();
             })
         });
+        const img = new Image();
+        img.src = canvas.toDataURL("image/png");
+        setCanvasImage(img);
     }
 
     useEffect(() => {
@@ -59,9 +64,12 @@ const Maze = ({ maze, showVisited }) => {
     }, [maze])
 
     useEffect(() => {
+        console.time("rendering")
         const canvas = canvasRef.current
         const ctx = canvas.getContext('2d')
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (end)
+            fillBlock(ctx, 'red', end);
 
         showVisited && visited.forEach(n => {
             fillBlock(ctx, 'lightskyblue', n);
@@ -73,7 +81,13 @@ const Maze = ({ maze, showVisited }) => {
             fillBlock(ctx, 'green', start);
         if (end)
             fillBlock(ctx, 'red', end);
-        drawMaze();
+
+        if (canvasImage) {
+            ctx.drawImage(canvasImage, 0, 0)
+        }
+        // drawMaze();
+        console.timeEnd("rendering")
+
     }, [start, end, path])
 
     const setStartPosition = (event) => {

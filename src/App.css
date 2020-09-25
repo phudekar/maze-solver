@@ -37,6 +37,10 @@
   }
 }
 
+.input-group {
+  margin: 10px 20px;
+}
+
 .maze {
   margin-left: 20px;
   text-align: left;
@@ -65,7 +69,7 @@
 }
 
 .block.end {
-  background-color:red;
+  background-color: red;
 }
 
 .block :first-child {
